@@ -2,9 +2,17 @@
  * Created by sunil.jhamnani on 1/12/16.
  */
 var http = require('http');
-var port = process.env.port || 8899;
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
+console.log("Making a request");
+var options = {
+    host: "www.google.com",
+    port: 80,
+    path: '/',
+    method: 'GET'
+}
+var req = http.request(options,function(response){
+    console.log(response.statusCode);
+    response.pipe(process.stdout);
+});
+
+req.end();
 
